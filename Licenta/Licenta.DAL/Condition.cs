@@ -21,13 +21,13 @@ namespace Licenta.DAL
         }
     
         public int ID { get; set; }
-        public string nume_medical { get; set; }
-        public string nume_popular { get; set; }
-        public string descriere { get; set; }
-        public string alte_detalii { get; set; }
-        public string indicatii { get; set; }
-        public int Nivel { get; set; }
-        public string comentarii { get; set; }
+        public string medical_name { get; set; }
+        public string popular_name { get; set; }
+        public string desc { get; set; }
+        public string other_details { get; set; }
+        public string advice { get; set; }
+        public int level { get; set; }
+        public string comments { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<simptome_boli> simptome_boli { get; set; }

@@ -25,11 +25,11 @@ namespace Licenta.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Condition> Conditions { get; set; }
         public virtual DbSet<pacient_simptome> pacient_simptome { get; set; }
         public virtual DbSet<Pacient> Pacients { get; set; }
         public virtual DbSet<Symptom> Symptoms { get; set; }
         public virtual DbSet<simptome_boli> simptome_boli { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Condition> Conditions { get; set; }
     }
 }
