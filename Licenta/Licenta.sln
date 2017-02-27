@@ -14,23 +14,32 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Mihai1|Any CPU = Mihai1|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Mihai1|Any CPU.ActiveCfg = Debug|Any CPU
+		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Mihai1|Any CPU.Build.0 = Debug|Any CPU
 		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{189ED995-FFAB-4DDE-ACB2-A62B15940DB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5CBD4935-132D-4B97-8666-DD48785797F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5CBD4935-132D-4B97-8666-DD48785797F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CBD4935-132D-4B97-8666-DD48785797F7}.Mihai1|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CBD4935-132D-4B97-8666-DD48785797F7}.Mihai1|Any CPU.Build.0 = Debug|Any CPU
 		{5CBD4935-132D-4B97-8666-DD48785797F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CBD4935-132D-4B97-8666-DD48785797F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Mihai1|Any CPU.ActiveCfg = Mihai1|Any CPU
+		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Mihai1|Any CPU.Build.0 = Mihai1|Any CPU
 		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F84F964-FCD6-4692-9B46-3D84FD171AA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Mihai1|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Mihai1|Any CPU.Build.0 = Debug|Any CPU
 		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0F5B35-706C-48E0-ADC4-B35B1C5E2AAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

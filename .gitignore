@@ -250,3 +250,6 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# ignore ConnectionStrings.config files
+ConnectionStrings.config
