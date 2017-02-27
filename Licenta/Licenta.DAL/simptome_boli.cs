@@ -20,7 +20,7 @@ namespace Licenta.DAL
         public string probabilitate { get; set; }
         public string comments { get; set; }
     
-        public virtual Symptom simptome { get; set; }
         public virtual Condition condition { get; set; }
+        public virtual Symptom symptom { get; set; }
     }
 }

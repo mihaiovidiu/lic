@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetAllConditions();
+            GetAllSymptoms();
             Console.ReadLine();
         }
 
@@ -20,7 +20,7 @@ namespace Licenta.ConsoleUI
             using (LicentaEntities ctx = new LicentaEntities())
             {
                 foreach (var symptom in ctx.Symptoms)
-                    Console.WriteLine(symptom.nume + " " + symptom.Id);
+                    Console.WriteLine(symptom.name + " " + symptom.Id);
             }
         }
 

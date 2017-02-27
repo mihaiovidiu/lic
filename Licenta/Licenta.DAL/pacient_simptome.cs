@@ -21,6 +21,6 @@ namespace Licenta.DAL
         public Nullable<System.TimeSpan> observation_time { get; set; }
     
         public virtual Pacient pacienti { get; set; }
-        public virtual Symptom simptome { get; set; }
+        public virtual Symptom symptom { get; set; }
     }
 }

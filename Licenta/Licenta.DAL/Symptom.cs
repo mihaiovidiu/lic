@@ -22,10 +22,10 @@ namespace Licenta.DAL
         }
     
         public int Id { get; set; }
-        public string nume { get; set; }
-        public string categorie { get; set; }
-        public string descriere { get; set; }
-        public string comentarii { get; set; }
+        public string name { get; set; }
+        public string category { get; set; }
+        public string desc { get; set; }
+        public string comments { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pacient_simptome> pacient_simptome { get; set; }
