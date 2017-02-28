@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201702262054109_FirstMigration.Designer.cs">
       <DependentUpon>201702262054109_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702281512098_AddColumnsToAspNetUsersTable.cs" />
+    <Compile Include="Migrations\201702281512098_AddColumnsToAspNetUsersTable.Designer.cs">
+      <DependentUpon>201702281512098_AddColumnsToAspNetUsersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -290,6 +294,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702262054109_FirstMigration.resx">
       <DependentUpon>201702262054109_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702281512098_AddColumnsToAspNetUsersTable.resx">
+      <DependentUpon>201702281512098_AddColumnsToAspNetUsersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

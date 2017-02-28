@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="LicentaModel.Pacient" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="LicentaModel.simptome_boli" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="LicentaModel.FK__pacient_sim__IDp__52593CB8" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LicentaModel.AspNetUser" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="LicentaModel.AspNetUser" Width="2.25" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LicentaModel.Condition" Width="1.5" PointX="3.75" PointY="7.5" />
         <AssociationConnector Association="LicentaModel.FK__simptome_bo__IDb__74AE54BC1" />
         <EntityTypeShape EntityType="LicentaModel.Symptom" Width="1.5" PointX="0.75" PointY="2.625" />

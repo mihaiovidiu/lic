@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetAllSymptoms();
+            GetAllConditions();
             Console.ReadLine();
         }
 

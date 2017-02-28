@@ -26,5 +26,12 @@ namespace Licenta.DAL
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Sex { get; set; }
+        public Nullable<System.DateTime> Birthdate { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
     }
 }
