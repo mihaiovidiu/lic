@@ -32,5 +32,6 @@ namespace Licenta.ConsoleUI
                     Console.WriteLine(c.medical_name + "///" + c.popular_name);
             }
         }
+        
     }
 }

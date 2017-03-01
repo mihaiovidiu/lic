@@ -42,44 +42,6 @@
           <Property Name="level" Type="int" Nullable="false" />
           <Property Name="comments" Type="text" />
         </EntityType>
-        <EntityType Name="pacient_simptome">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDp" Type="int" Nullable="false" />
-          <Property Name="IDs" Type="int" Nullable="false" />
-          <Property Name="observation_date" Type="date" />
-          <Property Name="observation_time" Type="time" Precision="7" />
-        </EntityType>
-        <EntityType Name="pacienti">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nume" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="prenume" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="sex" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="data_nastere" Type="date" />
-          <Property Name="adresa" Type="text" />
-          <Property Name="email" Type="varchar" MaxLength="40" />
-          <Property Name="oras" Type="varchar" MaxLength="40" />
-          <Property Name="judet" Type="varchar" MaxLength="15" />
-          <Property Name="alte_detalii" Type="text" />
-          <Property Name="comentarii" Type="text" />
-          <Property Name="creat" Type="datetime" />
-          <Property Name="last_modified" Type="varchar" MaxLength="40" />
-        </EntityType>
-        <EntityType Name="simptome_boli">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDb" Type="int" Nullable="false" />
-          <Property Name="IDs" Type="int" Nullable="false" />
-          <Property Name="probabilitate" Type="varchar" MaxLength="40" />
-          <Property Name="comments" Type="text" />
-        </EntityType>
         <EntityType Name="symptoms">
           <Key>
             <PropertyRef Name="Id" />
@@ -90,50 +52,70 @@
           <Property Name="desc" Type="text" />
           <Property Name="comments" Type="text" />
         </EntityType>
-        <Association Name="FK__pacient_sim__IDp__52593CB8">
-          <End Role="pacienti" Type="Self.pacienti" Multiplicity="1" />
-          <End Role="pacient_simptome" Type="Self.pacient_simptome" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="pacienti">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="pacient_simptome">
-              <PropertyRef Name="IDp" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="symptoms_conditions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDc" Type="int" Nullable="false" />
+          <Property Name="IDs" Type="int" Nullable="false" />
+          <Property Name="probability" Type="varchar" MaxLength="40" />
+          <Property Name="comments" Type="text" />
+        </EntityType>
+        <EntityType Name="users_symptoms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDU" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IDs" Type="int" Nullable="false" />
+          <Property Name="observation_date" Type="date" />
+          <Property Name="observation_time" Type="time" Precision="7" />
+        </EntityType>
         <Association Name="FK__pacient_sim__IDs__7E37BEF6">
           <End Role="symptoms" Type="Self.symptoms" Multiplicity="1" />
-          <End Role="pacient_simptome" Type="Self.pacient_simptome" Multiplicity="*" />
+          <End Role="users_symptoms" Type="Self.users_symptoms" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="symptoms">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="pacient_simptome">
+            <Dependent Role="users_symptoms">
               <PropertyRef Name="IDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pacient_sim__IDU__3A4CA8FD">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="users_symptoms" Type="Self.users_symptoms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="users_symptoms">
+              <PropertyRef Name="IDU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__simptome_bo__IDb__74AE54BC">
           <End Role="conditions" Type="Self.conditions" Multiplicity="1" />
-          <End Role="simptome_boli" Type="Self.simptome_boli" Multiplicity="*" />
+          <End Role="symptoms_conditions" Type="Self.symptoms_conditions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="conditions">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="simptome_boli">
-              <PropertyRef Name="IDb" />
+            <Dependent Role="symptoms_conditions">
+              <PropertyRef Name="IDc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__simptome_bo__IDs__7D439ABD">
           <End Role="symptoms" Type="Self.symptoms" Multiplicity="1" />
-          <End Role="simptome_boli" Type="Self.simptome_boli" Multiplicity="*" />
+          <End Role="symptoms_conditions" Type="Self.symptoms_conditions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="symptoms">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="simptome_boli">
+            <Dependent Role="symptoms_conditions">
               <PropertyRef Name="IDs" />
             </Dependent>
           </ReferentialConstraint>
@@ -141,110 +123,115 @@
         <EntityContainer Name="LicentaModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="conditions" EntityType="Self.conditions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="pacient_simptome" EntityType="Self.pacient_simptome" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="pacienti" EntityType="Self.pacienti" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="simptome_boli" EntityType="Self.simptome_boli" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="symptoms" EntityType="Self.symptoms" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__pacient_sim__IDp__52593CB8" Association="Self.FK__pacient_sim__IDp__52593CB8">
-            <End Role="pacienti" EntitySet="pacienti" />
-            <End Role="pacient_simptome" EntitySet="pacient_simptome" />
-          </AssociationSet>
+          <EntitySet Name="symptoms_conditions" EntityType="Self.symptoms_conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users_symptoms" EntityType="Self.users_symptoms" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__pacient_sim__IDs__7E37BEF6" Association="Self.FK__pacient_sim__IDs__7E37BEF6">
             <End Role="symptoms" EntitySet="symptoms" />
-            <End Role="pacient_simptome" EntitySet="pacient_simptome" />
+            <End Role="users_symptoms" EntitySet="users_symptoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pacient_sim__IDU__3A4CA8FD" Association="Self.FK__pacient_sim__IDU__3A4CA8FD">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="users_symptoms" EntitySet="users_symptoms" />
           </AssociationSet>
           <AssociationSet Name="FK__simptome_bo__IDb__74AE54BC" Association="Self.FK__simptome_bo__IDb__74AE54BC">
             <End Role="conditions" EntitySet="conditions" />
-            <End Role="simptome_boli" EntitySet="simptome_boli" />
+            <End Role="symptoms_conditions" EntitySet="symptoms_conditions" />
           </AssociationSet>
           <AssociationSet Name="FK__simptome_bo__IDs__7D439ABD" Association="Self.FK__simptome_bo__IDs__7D439ABD">
             <End Role="symptoms" EntitySet="symptoms" />
-            <End Role="simptome_boli" EntitySet="simptome_boli" />
+            <End Role="symptoms_conditions" EntitySet="symptoms_conditions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LicentaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="pacient_simptome">
+        <EntityContainer Name="LicentaEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="Conditions" EntityType="LicentaModel.Condition" />
+          <EntitySet Name="Symptoms" EntityType="LicentaModel.Symptom" />
+          <EntitySet Name="symptoms_conditions" EntityType="LicentaModel.symptoms_conditions" />
+          <AssociationSet Name="FK__simptome_bo__IDb__74AE54BC" Association="LicentaModel.FK__simptome_bo__IDb__74AE54BC">
+            <End Role="Condition" EntitySet="Conditions" />
+            <End Role="symptoms_conditions" EntitySet="symptoms_conditions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simptome_bo__IDs__7D439ABD" Association="LicentaModel.FK__simptome_bo__IDs__7D439ABD">
+            <End Role="Symptom" EntitySet="Symptoms" />
+            <End Role="symptoms_conditions" EntitySet="symptoms_conditions" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="LicentaModel.AspNetUser" />
+          <EntitySet Name="users_symptoms" EntityType="LicentaModel.users_symptoms" />
+          <AssociationSet Name="FK__pacient_sim__IDU__3A4CA8FD" Association="LicentaModel.FK__pacient_sim__IDU__3A4CA8FD">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="users_symptoms" EntitySet="users_symptoms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pacient_sim__IDs__7E37BEF6" Association="LicentaModel.FK__pacient_sim__IDs__7E37BEF6">
+            <End Role="Symptom" EntitySet="Symptoms" />
+            <End Role="users_symptoms" EntitySet="users_symptoms" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Condition">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDp" Type="Int32" Nullable="false" />
-          <Property Name="IDs" Type="Int32" Nullable="false" />
-          <Property Name="observation_date" Type="DateTime" Precision="0" />
-          <Property Name="observation_time" Type="Time" Precision="7" />
-          <NavigationProperty Name="pacienti" Relationship="Self.FK__pacient_sim__IDp__52593CB8" FromRole="pacient_simptome" ToRole="pacienti" />
-          <NavigationProperty Name="symptom" Relationship="LicentaModel.FK__pacient_sim__IDs__7E37BEF61" FromRole="pacient_simptome" ToRole="symptom1" />
-        </EntityType>
-        <EntityType Name="Pacient">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nume" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prenume" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sex" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="data_nastere" Type="DateTime" Precision="0" />
-          <Property Name="adresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="oras" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="judet" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="alte_detalii" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comentarii" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="creat" Type="DateTime" Precision="3" />
-          <Property Name="last_modified" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="pacient_simptome" Relationship="Self.FK__pacient_sim__IDp__52593CB8" FromRole="pacienti" ToRole="pacient_simptome" />
-        </EntityType>
-        <EntityType Name="simptome_boli">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDb" Type="Int32" Nullable="false" />
-          <Property Name="IDs" Type="Int32" Nullable="false" />
-          <Property Name="probabilitate" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="medical_name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="popular_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="other_details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="advice" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="level" Type="Int32" Nullable="false" />
           <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="condition" Relationship="LicentaModel.FK__simptome_bo__IDb__74AE54BC1" FromRole="simptome_boli" ToRole="condition1" />
-          <NavigationProperty Name="symptom" Relationship="LicentaModel.FK__simptome_bo__IDs__7D439ABD1" FromRole="simptome_boli" ToRole="symptom1" />
+          <NavigationProperty Name="symptoms_conditions" Relationship="LicentaModel.FK__simptome_bo__IDb__74AE54BC" FromRole="Condition" ToRole="symptoms_conditions" />
         </EntityType>
-        <Association Name="FK__pacient_sim__IDp__52593CB8">
-          <End Role="pacienti" Type="LicentaModel.Pacient" Multiplicity="1" />
-          <End Role="pacient_simptome" Type="Self.pacient_simptome" Multiplicity="*" />
+        <EntityType Name="Symptom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="symptoms_conditions" Relationship="LicentaModel.FK__simptome_bo__IDs__7D439ABD" FromRole="Symptom" ToRole="symptoms_conditions" />
+          <NavigationProperty Name="users_symptoms" Relationship="LicentaModel.FK__pacient_sim__IDs__7E37BEF6" FromRole="Symptom" ToRole="users_symptoms" />
+        </EntityType>
+        <EntityType Name="symptoms_conditions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDc" Type="Int32" Nullable="false" />
+          <Property Name="IDs" Type="Int32" Nullable="false" />
+          <Property Name="probability" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="condition" Relationship="LicentaModel.FK__simptome_bo__IDb__74AE54BC" FromRole="symptoms_conditions" ToRole="Condition" />
+          <NavigationProperty Name="symptom" Relationship="LicentaModel.FK__simptome_bo__IDs__7D439ABD" FromRole="symptoms_conditions" ToRole="Symptom" />
+        </EntityType>
+        <Association Name="FK__simptome_bo__IDb__74AE54BC">
+          <End Type="LicentaModel.Condition" Role="Condition" Multiplicity="1" />
+          <End Type="LicentaModel.symptoms_conditions" Role="symptoms_conditions" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="pacienti">
-              <PropertyRef Name="Id" />
+            <Principal Role="Condition">
+              <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="pacient_simptome">
-              <PropertyRef Name="IDp" />
+            <Dependent Role="symptoms_conditions">
+              <PropertyRef Name="IDc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LicentaEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
-          <EntitySet Name="pacient_simptome" EntityType="Self.pacient_simptome" />
-          <EntitySet Name="Pacients" EntityType="LicentaModel.Pacient" />
-          <EntitySet Name="simptome_boli" EntityType="Self.simptome_boli" />
-          <AssociationSet Name="FK__pacient_sim__IDp__52593CB8" Association="Self.FK__pacient_sim__IDp__52593CB8">
-            <End Role="pacienti" EntitySet="Pacients" />
-            <End Role="pacient_simptome" EntitySet="pacient_simptome" />
-          </AssociationSet>
-          <EntitySet Name="AspNetUsers" EntityType="LicentaModel.AspNetUser" />
-          <EntitySet Name="Conditions" EntityType="LicentaModel.Condition" />
-          <AssociationSet Name="FK__simptome_bo__IDb__74AE54BC1" Association="LicentaModel.FK__simptome_bo__IDb__74AE54BC1">
-            <End Role="condition1" EntitySet="Conditions" />
-            <End Role="simptome_boli" EntitySet="simptome_boli" />
-          </AssociationSet>
-          <EntitySet Name="Symptoms" EntityType="LicentaModel.Symptom" />
-          <AssociationSet Name="FK__pacient_sim__IDs__7E37BEF61" Association="LicentaModel.FK__pacient_sim__IDs__7E37BEF61">
-            <End Role="symptom1" EntitySet="Symptoms" />
-            <End Role="pacient_simptome" EntitySet="pacient_simptome" />
-          </AssociationSet>
-          <AssociationSet Name="FK__simptome_bo__IDs__7D439ABD1" Association="LicentaModel.FK__simptome_bo__IDs__7D439ABD1">
-            <End Role="symptom1" EntitySet="Symptoms" />
-            <End Role="simptome_boli" EntitySet="simptome_boli" />
-          </AssociationSet>
-        </EntityContainer>
+        <Association Name="FK__simptome_bo__IDs__7D439ABD">
+          <End Type="LicentaModel.Symptom" Role="Symptom" Multiplicity="1" />
+          <End Type="LicentaModel.symptoms_conditions" Role="symptoms_conditions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Symptom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="symptoms_conditions">
+              <PropertyRef Name="IDs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -268,65 +255,40 @@
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="users_symptoms" Relationship="LicentaModel.FK__pacient_sim__IDU__3A4CA8FD" FromRole="AspNetUser" ToRole="users_symptoms" />
         </EntityType>
-        <EntityType Name="Condition">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="medical_name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="popular_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="other_details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="advice" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="level" Type="Int32" Nullable="false" />
-          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="simptome_boli" Relationship="LicentaModel.FK__simptome_bo__IDb__74AE54BC1" FromRole="condition1" ToRole="simptome_boli" />
-        </EntityType>
-        <Association Name="FK__simptome_bo__IDb__74AE54BC1">
-          <End Type="LicentaModel.Condition" Role="condition1" Multiplicity="1" />
-          <End Type="LicentaModel.simptome_boli" Role="simptome_boli" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="condition1">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="simptome_boli">
-              <PropertyRef Name="IDb" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Symptom">
+        <EntityType Name="users_symptoms">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="category" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="pacient_simptome" Relationship="LicentaModel.FK__pacient_sim__IDs__7E37BEF61" FromRole="symptom1" ToRole="pacient_simptome" />
-          <NavigationProperty Name="simptome_boli" Relationship="LicentaModel.FK__simptome_bo__IDs__7D439ABD1" FromRole="symptom1" ToRole="simptome_boli" />
+          <Property Name="IDU" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IDs" Type="Int32" Nullable="false" />
+          <Property Name="observation_date" Type="DateTime" Precision="0" />
+          <Property Name="observation_time" Type="Time" Precision="7" />
+          <NavigationProperty Name="AspNetUser" Relationship="LicentaModel.FK__pacient_sim__IDU__3A4CA8FD" FromRole="users_symptoms" ToRole="AspNetUser" />
+          <NavigationProperty Name="symptom" Relationship="LicentaModel.FK__pacient_sim__IDs__7E37BEF6" FromRole="users_symptoms" ToRole="Symptom" />
         </EntityType>
-        <Association Name="FK__pacient_sim__IDs__7E37BEF61">
-          <End Type="LicentaModel.Symptom" Role="symptom1" Multiplicity="1" />
-          <End Type="LicentaModel.pacient_simptome" Role="pacient_simptome" Multiplicity="*" />
+        <Association Name="FK__pacient_sim__IDU__3A4CA8FD">
+          <End Type="LicentaModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="LicentaModel.users_symptoms" Role="users_symptoms" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="symptom1">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="pacient_simptome">
-              <PropertyRef Name="IDs" />
+            <Dependent Role="users_symptoms">
+              <PropertyRef Name="IDU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__simptome_bo__IDs__7D439ABD1">
-          <End Type="LicentaModel.Symptom" Role="symptom1" Multiplicity="1" />
-          <End Type="LicentaModel.simptome_boli" Role="simptome_boli" Multiplicity="*" />
+        <Association Name="FK__pacient_sim__IDs__7E37BEF6">
+          <End Type="LicentaModel.Symptom" Role="Symptom" Multiplicity="1" />
+          <End Type="LicentaModel.users_symptoms" Role="users_symptoms" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="symptom1">
+            <Principal Role="Symptom">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="simptome_boli">
+            <Dependent Role="users_symptoms">
               <PropertyRef Name="IDs" />
             </Dependent>
           </ReferentialConstraint>
@@ -337,44 +299,39 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LicentaModelStoreContainer" CdmEntityContainer="LicentaEntities">
-          <EntitySetMapping Name="pacient_simptome">
-            <EntityTypeMapping TypeName="LicentaModel.pacient_simptome">
-              <MappingFragment StoreEntitySet="pacient_simptome">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IDp" ColumnName="IDp" />
-                <ScalarProperty Name="IDs" ColumnName="IDs" />
-                <ScalarProperty Name="observation_date" ColumnName="observation_date" />
-                <ScalarProperty Name="observation_time" ColumnName="observation_time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pacients">
-            <EntityTypeMapping TypeName="LicentaModel.Pacient">
-              <MappingFragment StoreEntitySet="pacienti">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="nume" ColumnName="nume" />
-                <ScalarProperty Name="prenume" ColumnName="prenume" />
-                <ScalarProperty Name="sex" ColumnName="sex" />
-                <ScalarProperty Name="data_nastere" ColumnName="data_nastere" />
-                <ScalarProperty Name="adresa" ColumnName="adresa" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="oras" ColumnName="oras" />
-                <ScalarProperty Name="judet" ColumnName="judet" />
-                <ScalarProperty Name="alte_detalii" ColumnName="alte_detalii" />
-                <ScalarProperty Name="comentarii" ColumnName="comentarii" />
-                <ScalarProperty Name="creat" ColumnName="creat" />
-                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="simptome_boli">
-            <EntityTypeMapping TypeName="LicentaModel.simptome_boli">
-              <MappingFragment StoreEntitySet="simptome_boli">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IDb" ColumnName="IDb" />
-                <ScalarProperty Name="IDs" ColumnName="IDs" />
-                <ScalarProperty Name="probabilitate" ColumnName="probabilitate" />
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="LicentaModel.Condition">
+              <MappingFragment StoreEntitySet="conditions">
                 <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="advice" ColumnName="advice" />
+                <ScalarProperty Name="other_details" ColumnName="other_details" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="popular_name" ColumnName="popular_name" />
+                <ScalarProperty Name="medical_name" ColumnName="medical_name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Symptoms">
+            <EntityTypeMapping TypeName="LicentaModel.Symptom">
+              <MappingFragment StoreEntitySet="symptoms">
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="desc" ColumnName="desc" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="symptoms_conditions">
+            <EntityTypeMapping TypeName="LicentaModel.symptoms_conditions">
+              <MappingFragment StoreEntitySet="symptoms_conditions">
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="probability" ColumnName="probability" />
+                <ScalarProperty Name="IDs" ColumnName="IDs" />
+                <ScalarProperty Name="IDc" ColumnName="IDc" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -403,27 +360,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Conditions">
-            <EntityTypeMapping TypeName="LicentaModel.Condition">
-              <MappingFragment StoreEntitySet="conditions">
-                <ScalarProperty Name="comments" ColumnName="comments" />
-                <ScalarProperty Name="level" ColumnName="level" />
-                <ScalarProperty Name="advice" ColumnName="advice" />
-                <ScalarProperty Name="other_details" ColumnName="other_details" />
-                <ScalarProperty Name="desc" ColumnName="desc" />
-                <ScalarProperty Name="popular_name" ColumnName="popular_name" />
-                <ScalarProperty Name="medical_name" ColumnName="medical_name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Symptoms">
-            <EntityTypeMapping TypeName="LicentaModel.Symptom">
-              <MappingFragment StoreEntitySet="symptoms">
-                <ScalarProperty Name="comments" ColumnName="comments" />
-                <ScalarProperty Name="desc" ColumnName="desc" />
-                <ScalarProperty Name="category" ColumnName="category" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="users_symptoms">
+            <EntityTypeMapping TypeName="LicentaModel.users_symptoms">
+              <MappingFragment StoreEntitySet="users_symptoms">
+                <ScalarProperty Name="observation_time" ColumnName="observation_time" />
+                <ScalarProperty Name="observation_date" ColumnName="observation_date" />
+                <ScalarProperty Name="IDs" ColumnName="IDs" />
+                <ScalarProperty Name="IDU" ColumnName="IDU" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

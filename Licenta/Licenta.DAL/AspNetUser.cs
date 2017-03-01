@@ -14,6 +14,12 @@ namespace Licenta.DAL
     
     public partial class AspNetUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AspNetUser()
+        {
+            this.users_symptoms = new HashSet<users_symptoms>();
+        }
+    
         public string Id { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -33,5 +39,8 @@ namespace Licenta.DAL
         public string Address { get; set; }
         public string City { get; set; }
         public string County { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<users_symptoms> users_symptoms { get; set; }
     }
 }

@@ -5,17 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="49ada27541074c629bc3024ebe6dd94b" Name="Diagram1">
-        <EntityTypeShape EntityType="LicentaModel.pacient_simptome" Width="1.625" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicentaModel.Pacient" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicentaModel.simptome_boli" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
-        <AssociationConnector Association="LicentaModel.FK__pacient_sim__IDp__52593CB8" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="LicentaModel.AspNetUser" Width="2.25" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LicentaModel.Condition" Width="1.5" PointX="3.75" PointY="7.5" />
-        <AssociationConnector Association="LicentaModel.FK__simptome_bo__IDb__74AE54BC1" />
+        <EntityTypeShape EntityType="LicentaModel.Condition" Width="1.5" PointX="0.75" PointY="7.5" />
         <EntityTypeShape EntityType="LicentaModel.Symptom" Width="1.5" PointX="0.75" PointY="2.625" />
-        <AssociationConnector Association="LicentaModel.FK__pacient_sim__IDs__7E37BEF61" />
-        <AssociationConnector Association="LicentaModel.FK__simptome_bo__IDs__7D439ABD1" />
-      </Diagram>
+        <EntityTypeShape EntityType="LicentaModel.symptoms_conditions" Width="1.5" PointX="3" PointY="2.625" />
+        <AssociationConnector Association="LicentaModel.FK__simptome_bo__IDb__74AE54BC" />
+        <AssociationConnector Association="LicentaModel.FK__simptome_bo__IDs__7D439ABD" />
+        <EntityTypeShape EntityType="LicentaModel.AspNetUser" Width="2.125" PointX="3.125" PointY="6.375" />
+        <EntityTypeShape EntityType="LicentaModel.users_symptoms" Width="1.5" PointX="6" PointY="2.625" />
+        <AssociationConnector Association="LicentaModel.FK__pacient_sim__IDU__3A4CA8FD" />
+        <AssociationConnector Association="LicentaModel.FK__pacient_sim__IDs__7E37BEF6" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

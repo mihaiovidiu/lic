@@ -17,7 +17,7 @@ namespace Licenta.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Condition()
         {
-            this.simptome_boli = new HashSet<simptome_boli>();
+            this.symptoms_conditions = new HashSet<symptoms_conditions>();
         }
     
         public int ID { get; set; }
@@ -30,6 +30,6 @@ namespace Licenta.DAL
         public string comments { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<simptome_boli> simptome_boli { get; set; }
+        public virtual ICollection<symptoms_conditions> symptoms_conditions { get; set; }
     }
 }

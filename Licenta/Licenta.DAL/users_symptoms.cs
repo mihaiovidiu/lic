@@ -12,15 +12,15 @@ namespace Licenta.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class simptome_boli
+    public partial class users_symptoms
     {
         public int Id { get; set; }
-        public int IDb { get; set; }
+        public string IDU { get; set; }
         public int IDs { get; set; }
-        public string probabilitate { get; set; }
-        public string comments { get; set; }
+        public Nullable<System.DateTime> observation_date { get; set; }
+        public Nullable<System.TimeSpan> observation_time { get; set; }
     
-        public virtual Condition condition { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Symptom symptom { get; set; }
     }
 }
