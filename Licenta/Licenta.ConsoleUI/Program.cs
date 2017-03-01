@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetAllConditions();
+            GetSymptomsForCondition("Anemie");
             Console.ReadLine();
         }
 
@@ -29,8 +29,27 @@ namespace Licenta.ConsoleUI
             using (LicentaEntities context = new LicentaEntities())
             {
                 foreach (Condition c in context.Conditions)
-                    Console.WriteLine(c.medical_name + "///" + c.popular_name);
+                    Console.WriteLine("medical name: " +  c.medical_name + "; popular name:" + c.popular_name);
             }
+        }
+
+        static void GetSymptomsForCondition(string conditionName)
+        {
+            bool conditionExists = true;
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                Condition c = ctx.Conditions.FirstOrDefault(cond => cond.medical_name.Contains(conditionName));
+                if (c != null)
+                {
+                    foreach (var symptomsCondition in c.symptoms_conditions)
+                        Console.WriteLine(symptomsCondition.symptom.name);
+                }
+                else
+                    conditionExists = false;
+            }
+
+            if (!conditionExists)
+                Console.WriteLine($"Condition '{conditionName}' does not exist in database");
         }
         
     }
