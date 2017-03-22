@@ -1,0 +1,106 @@
+/* CSS Document */
+
+#header{
+	background-color:#13552F;
+	color: #8CA406;
+}
+#titlu {
+	padding-top: 50px;
+}
+
+#navbar-top{
+	background-color: #13552F;
+	border:none;
+}
+
+#navbar-top a{
+	height:40px;
+	color: #8CA406;
+}
+#navbar-top .navbar-inverse{
+	background-color: #13552F;
+}
+
+#navbar-top .navbar-active{
+	background-color: #011664;
+	margin-top: 5px;
+}
+
+#navbar-top a.navbar-active{
+	padding-top: 10px;
+}
+
+#bottom-navbar{
+	height: 60px;
+	padding: 10px;
+}
+
+#bottom-navbar p{
+	color: white;
+	margin-top: 10px;
+}
+
+#dropdown a{
+	background-color: #13552F;
+}
+#dropdown .dropdown-menu{
+	background-color: #13552F;
+	text-align: center;
+}
+
+#dropdown .dropdown-menu a{
+	padding-top: 10px;
+}
+
+#title {
+	text-align: center;
+}
+
+/* Lista Boli */
+
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 500px;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
+/*Spitale */
+
+#cauta-spital {
+	align-content: flex-end;
+}
