@@ -7,11 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="padding-bottom: 70px">
     <div class="container-fluid">
         <div id="header" class="row">
-            <div id="imagine-bebe" class="col-md-4"><img src="/Content/Images/ImgResponsive_Placeholder.png")" class="img-circle img-responsive" alt="Placeholder image"></div>
-            <div id="titlu" class="col-md-4 col-md-offset-4"><h1>PediatrulTau</h1></div>
+            <div class="col-md-4" ><img src="/Content/Images/ImgResponsive_Placeholder.jpg")" class="img-circle img-responsive" alt="imagine bebe" id="imagine-bebe"></div>
+            <div id="titlu" class="col-md-4 col-md-offset-4"><h1>@Html.ActionLink("PediatrulTau", "Index", "Home")</h1></div>
         </div>
     </div>
 
@@ -20,7 +20,7 @@
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dropdown" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="dropdown">
@@ -40,7 +40,8 @@
                         <li><a href="#">Spital</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Log In", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Log In", "Login", "Account")</li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -55,7 +56,7 @@
         <nav id="bottom-navbar" class="navbar navbar-inverse navbar-fixed-bottom">
             <div class="container">
                 <div class="nav navbar-nav">
-                    <p>&copy;Licenta 2017</p>
+                    <p>&copy;Licenta 2017 Bogdan Ungureanu</p>
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <a href="#"><img src="/content/images/ui/icon_facebook.png" width="33" height="33" alt="" /></a>

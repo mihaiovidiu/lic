@@ -1,11 +1,27 @@
 /* CSS Document */
-
 #header{
 	background-color:#13552F;
 	color: #8CA406;
 }
+#imagine-bebe{
+    padding:15px;
+    align-items: flex-end;
+    min-width: 300px;
+    max-width:350px;
+}
+
 #titlu {
-	padding-top: 50px;
+    padding-top: 80px;
+    text-align:center;
+}
+
+#titlu a {
+        color: #8CA406
+}
+
+#titlu a:hover{
+    color:white;
+    text-decoration: none;
 }
 
 #navbar-top{
@@ -16,7 +32,13 @@
 #navbar-top a{
 	height:40px;
 	color: #8CA406;
+    width: inherit;
 }
+
+#navbar-top a:hover {
+    color: white;
+}
+
 #navbar-top .navbar-inverse{
 	background-color: #13552F;
 }
@@ -26,8 +48,16 @@
 	margin-top: 5px;
 }
 
+.navbar-active {
+    background-color: #011664;
+}
+
 #navbar-top a.navbar-active{
 	padding-top: 10px;
+}
+
+#navbar-top .navbar-active:hover {
+    background: #060547;
 }
 
 #bottom-navbar{

@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetSymptomsForCondition("Anemie");
+            GetSymptomsForCondition("APENDICITA ACUTA");
             Console.ReadLine();
         }
 
@@ -26,9 +26,9 @@ namespace Licenta.ConsoleUI
 
         static void GetAllConditions()
         {
-            using (LicentaEntities context = new LicentaEntities())
+            using (LicentaEntities ctx = new LicentaEntities())
             {
-                foreach (Condition c in context.Conditions)
+                foreach (Condition c in ctx.Conditions)
                     Console.WriteLine("medical name: " +  c.medical_name + "; popular name:" + c.popular_name);
             }
         }
@@ -38,11 +38,12 @@ namespace Licenta.ConsoleUI
             bool conditionExists = true;
             using (LicentaEntities ctx = new LicentaEntities())
             {
-                Condition c = ctx.Conditions.FirstOrDefault(cond => cond.medical_name.Contains(conditionName));
+                //Condition c = ctx.Conditions.FirstOrDefault(cond => cond.medical_name.Contains(conditionName));
+                Condition c = ctx.Conditions.FirstOrDefault(cond => cond.medical_name == conditionName);
                 if (c != null)
                 {
                     foreach (var symptomsCondition in c.symptoms_conditions)
-                        Console.WriteLine(symptomsCondition.symptom.name);
+                        Console.WriteLine(symptomsCondition.symptom.name + "-" + symptomsCondition.symptom.comments);
                 }
                 else
                     conditionExists = false;
@@ -51,6 +52,24 @@ namespace Licenta.ConsoleUI
             if (!conditionExists)
                 Console.WriteLine($"Condition '{conditionName}' does not exist in database");
         }
+        static void GetConditionsForSymptoms(string symptomName)
+        {
+            bool symptomExists = true;
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                Symptom s = ctx.Symptoms.FirstOrDefault(symp => symp.name == symptomName);
+                if (s != null)
+                {
+                    foreach (var symptomsCondition in s.symptoms_conditions)
+                        Console.WriteLine(symptomsCondition.condition.medical_name + symptomsCondition.condition.popular_name);
+                }
+                else
+                    symptomExists = false;
+            }
+            if (!symptomExists)
+                Console.WriteLine($"Symptom '{symptomName}' does not exist in database");
+        }
+
         
     }
 }
