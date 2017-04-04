@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetSymptomsForCondition("APENDICITA ACUTA");
+            GetSymptomsInCategory("ORL");
             Console.ReadLine();
         }
 
@@ -20,7 +20,27 @@ namespace Licenta.ConsoleUI
             using (LicentaEntities ctx = new LicentaEntities())
             {
                 foreach (var symptom in ctx.Symptoms)
-                    Console.WriteLine(symptom.name + " " + symptom.Id);
+                    Console.WriteLine(symptom.name + " " + symptom.Id + "; Category = " + symptom.category);
+            }
+        }
+
+        static void GetAllSymptomCategories()
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                foreach (var categoryName in ctx.Symptoms.Select(s => s.category).Distinct())
+                    Console.WriteLine(categoryName);
+            }
+        }
+
+        static void GetSymptomsInCategory(string categoryName)
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                var symptomsInCategory = ctx.Symptoms.Where(s => s.category == categoryName);
+                Console.WriteLine("Conditions in '" + categoryName + "' category:");
+                foreach (Symptom s in symptomsInCategory)
+                    Console.WriteLine(s.name);
             }
         }
 

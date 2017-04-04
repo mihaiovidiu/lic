@@ -1,0 +1,58 @@
+﻿
+@model IEnumerable<Licenta.MvcUI.ViewModels.CategoryOfSymptoms>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3">
+                <h2>Lista Simptome</h2>
+                <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+                    @foreach (var category in Model)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse-@category.CategoryName">@category.CategoryName</a></h4>
+                            </div>
+                            <div id="collapse-@category.CategoryName" class="panel-collapse collapse">
+                                <!--collapse in-->
+                                <div class="panel-body">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Vezi simptome<span class="caret"></span></button>
+                                        <ul class="dropdown-menu">
+                                            @foreach (var symptom in category.Symptoms)
+                                            {
+                                                <li>
+                                                    <input type="checkbox" id="Checkbox_@symptom.Id">
+                                                    <label for="Checkbox_@symptom.Id">@symptom.name</label>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <h2>Cauta Simptome</h2>
+                <div class="input-group" id="search-simptom">
+                    <input type="text" class="form-control" placeholder="Cauta Simptom" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+
+                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+</div>
+
