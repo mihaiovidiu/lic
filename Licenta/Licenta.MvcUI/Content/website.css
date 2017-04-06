@@ -134,3 +134,10 @@
 #cauta-spital {
 	align-content: flex-end;
 }
+
+
+/*Lista Simptome*/
+
+#Checkboxes {
+    overflow: visible !important;
+}
