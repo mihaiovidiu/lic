@@ -139,5 +139,8 @@
 /*Lista Simptome*/
 
 #Checkboxes {
-    overflow: visible !important;
+    max-height: 200px;
+    width:400px;
+    OVERFLOW-Y: scroll;
+    overflow-x: hidden;
 }
