@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetSymptomsInCategory("ORL");
+            GetSymptomsforBodyPart("abdomen");
             Console.ReadLine();
         }
 
@@ -49,7 +49,7 @@ namespace Licenta.ConsoleUI
             using (LicentaEntities ctx = new LicentaEntities())
             {
                 foreach (Condition c in ctx.Conditions)
-                    Console.WriteLine("medical name: " +  c.medical_name + "; popular name:" + c.popular_name);
+                    Console.WriteLine("medical name: " + c.medical_name + "; popular name:" + c.popular_name);
             }
         }
 
@@ -90,6 +90,15 @@ namespace Licenta.ConsoleUI
                 Console.WriteLine($"Symptom '{symptomName}' does not exist in database");
         }
 
-        
+        static void GetSymptomsforBodyPart(string bodyPart)
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                var symptomsInBodyPart = ctx.Symptoms.Where(s => s.bodyPart == bodyPart);
+                Console.WriteLine("Syptoms in '" + bodyPart + "' category:");
+                foreach (Symptom s in symptomsInBodyPart)
+                    Console.WriteLine(s.name);
+            } 
+        }
     }
 }

@@ -51,6 +51,7 @@
           <Property Name="category" Type="varchar" MaxLength="80" />
           <Property Name="desc" Type="text" />
           <Property Name="comments" Type="text" />
+          <Property Name="bodyPart" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="symptoms_conditions">
           <Key>
@@ -195,6 +196,7 @@
           <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="symptoms_conditions" Relationship="LicentaModel.FK__simptome_bo__IDs__7D439ABD" FromRole="Symptom" ToRole="symptoms_conditions" />
           <NavigationProperty Name="users_symptoms" Relationship="LicentaModel.FK__pacient_sim__IDs__7E37BEF6" FromRole="Symptom" ToRole="users_symptoms" />
+          <Property Name="bodyPart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="symptoms_conditions">
           <Key>
@@ -316,6 +318,7 @@
           <EntitySetMapping Name="Symptoms">
             <EntityTypeMapping TypeName="LicentaModel.Symptom">
               <MappingFragment StoreEntitySet="symptoms">
+                <ScalarProperty Name="bodyPart" ColumnName="bodyPart" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="desc" ColumnName="desc" />
                 <ScalarProperty Name="category" ColumnName="category" />

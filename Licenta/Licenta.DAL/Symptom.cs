@@ -26,6 +26,7 @@ namespace Licenta.DAL
         public string category { get; set; }
         public string desc { get; set; }
         public string comments { get; set; }
+        public string bodyPart { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<symptoms_conditions> symptoms_conditions { get; set; }
