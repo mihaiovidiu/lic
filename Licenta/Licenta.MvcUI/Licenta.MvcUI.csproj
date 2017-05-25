@@ -212,6 +212,7 @@
     <Compile Include="Controllers\Api\SymptomsController.cs" />
     <Compile Include="Controllers\ConditionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SymptomsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -307,6 +308,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Conditions\Index.cshtml" />
     <Content Include="Views\Symptoms\Index.cshtml" />
+    <Content Include="Views\Hospital\Index.cshtml" />
     <None Include="Web.Mihai1.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
