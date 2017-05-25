@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetSymptomsforBodyPart("abdomen");
+            GetAllBodyParts();
             Console.ReadLine();
         }
 
@@ -99,6 +99,15 @@ namespace Licenta.ConsoleUI
                 foreach (Symptom s in symptomsInBodyPart)
                     Console.WriteLine(s.name);
             } 
+        }
+
+        static void GetAllBodyParts()
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                foreach (var bodyPart in ctx.Symptoms.Select(s => s.bodyPart).Distinct())
+                    Console.WriteLine(bodyPart);
+            }
         }
     }
 }

@@ -144,3 +144,8 @@
     OVERFLOW-Y: scroll;
     overflow-x: hidden;
 }
+
+.panel-footer {
+    text-align: center;
+    margin-bottom: 0px;
+}
