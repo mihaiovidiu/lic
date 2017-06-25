@@ -2,7 +2,257 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.js"></script>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.38.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 }
+<style>
+    #map {
+        position: absolute;
+        left: 25%;
+        top: 0;
+        bottom: 0;
+        width: 75%;
+    }
 
-<h2>This is the Hospital page</h2>
+    .map-overlay {
+        position: absolute;
+        width: 25%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        background-color: #fff;
+        max-height: 100%;
+    }
 
+        .map-overlay fieldset {
+            display: none;
+            background: #ddd;
+            border: none;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .map-overlay input {
+            display: block;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .map-overlay .listing {
+            max-height: 100%;
+        }
+
+            .map-overlay .listing > * {
+                display: block;
+                padding: 5px 10px;
+                margin: 0;
+            }
+
+            .map-overlay .listing a {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                color: #404;
+                text-decoration: none;
+            }
+
+                .map-overlay .listing a:last-child {
+                    border: none;
+                }
+
+                .map-overlay .listing a:hover {
+                    background: #f0f0f0;
+                }
+</style>
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="map-overlay">
+                    <fieldset>
+                        <input id="feature-filter" type="text" placeholder="Filtreaza dupa nume" />
+                    </fieldset>
+                    <div id="feature-listing" class="listing"></div>
+                </div>
+                
+                <div id="map" style="width: 1000px; height: 600px;"></div>
+
+                <script>
+                    mapboxgl.accessToken = "pk.eyJ1IjoiZXNseTEwIiwiYSI6ImNqMTNraDJpdjAxY2szM21sc3hmNTZoZXQifQ.B4ZBPl7p35ZYw6d3a2uN-Q";
+                    var map = new mapboxgl.Map({
+                        container: "map",
+                        style: "mapbox://styles/esly10/cj48qvzmy25ek2rlnbb7m1hqu",
+                        center: [26.102416, 44.427169],
+                        maxZoom: 20,
+                        minZoom: 11,
+                        zoom: 11
+                    });
+
+                    // Holds visible hospital features for filtering
+                    var hospital = [];
+
+                    // Create a popup, but don"t add it to the map yet.
+                    var popup = new mapboxgl.Popup({
+                        closeButton: false
+                    });
+
+                    var filterEl = document.getElementById("feature-filter");
+                    var listingEl = document.getElementById("feature-listing");
+
+                    function renderListings(features) {
+                        // Clear any existing listings
+                        listingEl.innerHTML = "";
+                        if (features.length) {
+                            features.forEach(function (feature) {
+                                var prop = feature.properties;
+                                var item = document.createElement("a");
+                                //item.href = prop.wikipedia;
+                                item.target = "#";
+                                item.textContent = prop.title;
+                                item.addEventListener("mouseover", function () {
+                                    // Highlight corresponding feature on the map
+                                    popup.setLngLat(feature.geometry.coordinates)
+                                        .setText(feature.properties.title)
+                                        .addTo(map);
+                                });
+                                listingEl.appendChild(item);
+                            });
+
+                            // Show the filter input
+                            filterEl.parentNode.style.display = "block";
+                        } else {
+                            var empty = document.createElement("p");
+                            empty.textContent = "Misca harta pentru a vedea rezultate";
+                            listingEl.appendChild(empty);
+
+                            // Hide the filter input
+                            filterEl.parentNode.style.display = "none";
+
+                            // remove features filter
+                            map.setFilter("spitale-copii-bucuresti", ["has", "description"]);
+                        }
+                    }
+
+                    function normalize(string) {
+                        return string.trim().toLowerCase();
+                    }
+
+                    function getUniqueFeatures(array, comparatorProperty) {
+                        var existingFeatureKeys = {};
+                        // Because features come from tiled vector data, feature geometries may be split
+                        // or duplicated across tile boundaries and, as a result, features may appear
+                        // multiple times in query results.
+                        var uniqueFeatures = array.filter(function (el) {
+                            if (existingFeatureKeys[el.properties[comparatorProperty]]) {
+                                return false;
+                            } else {
+                                existingFeatureKeys[el.properties[comparatorProperty]] = true;
+                                return true;
+                            }
+                        });
+
+                        return uniqueFeatures;
+                    }
+
+                    map.on("load", function () {
+
+                        map.on("click", function (e) {
+                            var features = map.queryRenderedFeatures(e.point, {
+                                layers: ["spitale-copii-bucuresti"] // replace this with the name of the layer
+                            });
+
+                            if (!features.length) {
+                                return;
+                            }
+
+                            var feature = features[0];
+
+                            var popup2 = new mapboxgl.Popup({ offset: [0, -15] })
+                                .setLngLat(feature.geometry.coordinates)
+                                .setHTML("<h3>" + feature.properties.title + "</h3><p>" + feature.properties.description + "</p>")
+                                .setLngLat(feature.geometry.coordinates)
+                                .addTo(map);
+                        });
+
+                        map.on("click", "spitale-copii-bucuresti", function (e) {
+                            map.flyTo({ center: e.features[0].geometry.coordinates, speed: 0.5, zoom: 13 });
+                        });
+
+                        map.on("moveend", function () {
+                            var features = map.queryRenderedFeatures({ layers: ["spitale-copii-bucuresti"] });
+
+                            if (features) {
+                                var uniqueFeatures = getUniqueFeatures(features, "title");
+                                // Populate features for the listing overlay.
+                                renderListings(uniqueFeatures);
+
+                                // Clear the input container
+                                filterEl.value = "";
+
+                                // Store the current features in sn `hospitals` variable to
+                                // later use for filtering on `keyup`.
+                                hospitals = uniqueFeatures;
+                            }
+                        });
+
+                        map.on("mousemove", "spitale-copii-bucuresti", function (e) {
+                            // Change the cursor style as a UI indicator.
+                            map.getCanvas().style.cursor = "pointer";
+
+                            // Populate the popup and set its coordinates based on the feature.
+                            var feature = e.features[0];
+                            popup.setLngLat(feature.geometry.coordinates)
+                                .setText(feature.properties.title)
+                                .addTo(map);
+                        });
+
+                        map.on("mouseleave", "spitale-copii-bucuresti", function () {
+                            map.getCanvas().style.cursor = "";
+                            popup.remove();
+                        });
+
+                        filterEl.addEventListener("keyup", function (e) {
+                            var value = normalize(e.target.value);
+
+                            // Filter visible features that don"t match the input value.
+                            var filtered = hospitals.filter(function (feature) {
+                                var title = normalize(feature.properties.title);
+                                var code = normalize(feature.properties.description);
+                                return title.indexOf(value) > -1 || code.indexOf(value) > -1;
+                            });
+
+                            // Populate the sidebar with filtered results
+                            renderListings(filtered);
+
+                            // Set the filter to populate features into the layer.
+                            map.setFilter("spitale-copii-bucuresti", ["in", "title"].concat(filtered.map(function (feature) {
+                                return feature.properties.description;
+                            })));
+                        });
+
+                        // Call this function on initialization
+                        // passing an empty array to render an empty state
+                        renderListings([]);
+                    });
+                </script>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
