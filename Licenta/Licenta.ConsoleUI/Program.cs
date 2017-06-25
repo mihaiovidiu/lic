@@ -11,7 +11,7 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetAllBodyParts();
+            GetConditionsForSymptoms("tahicardie");
             Console.ReadLine();
         }
 
@@ -72,7 +72,7 @@ namespace Licenta.ConsoleUI
             if (!conditionExists)
                 Console.WriteLine($"Condition '{conditionName}' does not exist in database");
         }
-        static void GetConditionsForSymptoms(string symptomName)
+        static void GetConditionsForSymptom(string symptomName)
         {
             bool symptomExists = true;
             using (LicentaEntities ctx = new LicentaEntities())
@@ -88,6 +88,18 @@ namespace Licenta.ConsoleUI
             }
             if (!symptomExists)
                 Console.WriteLine($"Symptom '{symptomName}' does not exist in database");
+        }
+
+        static void GetConditionsForSymptoms(params string[] symptomNames)
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                var conditions = ctx.Conditions.Where(condition =>
+                    symptomNames.All(s => condition.symptoms_conditions.Select(sc => sc.symptom.name).Contains(s)));
+                
+                foreach (Condition c in conditions)
+                    Console.WriteLine(c.medical_name + " " + c.popular_name);
+            }
         }
 
         static void GetSymptomsforBodyPart(string bodyPart)
@@ -109,5 +121,6 @@ namespace Licenta.ConsoleUI
                     Console.WriteLine(bodyPart);
             }
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using Licenta.DAL;
+﻿using AutoMapper;
+using Licenta.DAL;
+using Licenta.MvcUI.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace Licenta.MvcUI.Controllers.Api
         public SymptomsController()
         {
             this.dbContext = new LicentaEntities();
+            this.dbContext.Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void Dispose(bool disposing)
@@ -27,21 +30,22 @@ namespace Licenta.MvcUI.Controllers.Api
         // GET /api/symptoms
         public IHttpActionResult GetSymptoms()
         {
-            List<Symptom> symptomsByBodyPart = dbContext.Symptoms.ToList();
-            if (symptomsByBodyPart == null)
+            var allSymptoms = dbContext.Symptoms.ToList();
+            if (allSymptoms == null)
                 return NotFound();
             else
-                return Ok(symptomsByBodyPart);
+                return Ok(allSymptoms.Select(Mapper.Map<Symptom, SymptomDto>));
         }
 
         // GET /api/symptoms/id
-        public IHttpActionResult GetSymptomsByBodyPart(string id)
+        [System.Web.Http.Route("api/symptoms/{bodyPart}")]
+        public IHttpActionResult GetSymptomsByBodyPart(string bodyPart)
         {
-            List<Symptom> symptomsByBodyPart = dbContext.Symptoms.Where(s => s.bodyPart == id).ToList();
+            List<Symptom> symptomsByBodyPart = dbContext.Symptoms.Where(s => s.bodyPart == bodyPart).ToList();
             if (symptomsByBodyPart == null)
                 return NotFound();
             else
-                return Ok(symptomsByBodyPart);
+                return Ok(symptomsByBodyPart.Select(Mapper.Map<Symptom, SymptomDto>));
         }
     }
 }

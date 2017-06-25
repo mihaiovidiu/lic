@@ -21,9 +21,9 @@
                                     {
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab">
-                                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse-@category.CategoryName">@category.CategoryName</a></h4>
+                                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapse-@category.CategoryName.Replace(" ","")">@category.CategoryName</a></h4>
                                             </div>
-                                            <div id="collapse-@category.CategoryName" class="panel-collapse collapse">
+                                            <div id="collapse-@category.CategoryName.Replace(" ","")" class="panel-collapse collapse">
                                                 <!--collapse in-->
                                                 <div class="panel-body">
                                                     <div class="btn-group">
@@ -34,7 +34,7 @@
                                                                 {
                                                                     <li>
                                                                         <input type="checkbox" id="Checkbox_@symptom.Id">
-                                                                        <label for="Checkbox_@symptom.Id">@symptom.name</label>
+                                                                        <label for="Checkbox_@symptom.Id" data-id="@symptom.Id">@symptom.name</label>
                                                                     </li>
                                                                 }
                                                             </div>
@@ -72,37 +72,37 @@
                                     <div class="panel-body">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" max-width="230px" max-height="400px" viewBox="0 0 800 1440" xmlns:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <!--To get a link I've added a namespace: xmlns:xlink which is used inside an <a> tag. The <path> should be inside the anchor-->
-                                            <a xlink:href="http://google.com" xlink:show="new" xlink:title="Cap">
+                                            <a xlink:show="new" xlink:title="Cap">
                                                 <path id="cap" d="M466.375,115c-0.875-15.75-8.041-11.667-11.041-7.333c0.667-7.333,1.666-6.667,0-38.667S419,18,400,18c-30.833,0-50.167,31.5-53.167,44.5c-1.915,8.295-2.833,23.5-2.5,28.167s1,12.333,0.667,16.167C344,105,340.833,101,336.833,105S335,122,336,125.667s5.833,14.667,7.167,15.833s5.167,4.833,8.5-1.667c0.667,5.167,1.167,12.5,3.333,18.833c3,4,22.5,23.333,44.167,23.333s36.5-8.667,45.708-23c2.625-5.625,5-15.25,4.75-18.625c3.75,6.375,8.875,3.25,10-1.75S467.25,130.75,466.375,115z" fill="red" fill-opacity="0" stroke="red" stroke-opacity="0.5" cursor="pointer" style="fill: red; fill-opacity: 0; stroke: red; stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://yahoo.com" xlink:show="new" xlink:title="Ochi">
+                                            <a xlink:show="new" xlink:title="Ochi">
                                                 <path id="ochi_stang" d="M410,91.875c0-5.178,6.939-9.375,15.5-9.375s15.5,4.197,15.5,9.375s-6.939,9.375-15.5,9.375S410,97.053,410,91.875z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="ochi_drept" d="M362,91.875c0-5.178,6.939-9.375,15.5-9.375s15.5,4.197,15.5,9.375s-6.939,9.375-15.5,9.375S362,97.053,362,91.875z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer"></path>
                                             </a>
-                                            <a xlink:href="http://netflix.com" xlink:show="new" xlink:title="Ureche">
+                                            <a xlink:show="new" xlink:title="Ureche">
                                                 <path id="ureche_dreapta" d="M336.833,105c-4,4-1.833,17-0.833,20.667s5.833,14.667,7.167,15.833s5.167,4.833,8.5-1.667c0-10-4.627-25.305-6.667-33C344,105,340.833,101,336.833,105z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="ureche_stanga" d="M449.625,140.375c3.75,6.375,8.875,3.25,10-1.75s7.625-7.875,6.75-23.625s-8.041-11.667-11.041-7.333C454.333,112.333,448.917,135.25,449.625,140.375z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://facebook.com" xlink:show="new" xlink:title="Nas">
+                                            <a xlink:show="new" xlink:title="Nas">
                                                 <path id="nas" d="M392.375,104.25c-0.375,3.125-5,6.375-5.625,13.125c-0.438,4.731,6.25,7.5,10.25,6.5c5,2.625,6.75,0.625,9.875-0.625c5.75,0.875,8-3.25,8-7.75s-4.375-6.75-4.875-12.25s-3.375-7.625-3.125-13.5s-2.375-9.875-6.085-9.875c-5.21,0-6.29,7.875-5.915,10.625S392.75,101.125,392.375,104.25z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://siteureche.com" xlink:show="new" xlink:title="Ureche">
+                                            <a xlink:show="new" xlink:title="Ureche">
                                                 <path id="gura" d="M411.25,132.25c-2.256-2.723-6.231-1.652-7.875-0.75c-0.882,0.484-3.5,0.875-5.125-0.375s-6.125-0.125-7.375,1.625s-11.75,5.125-12.625,8.125s8.625,3.25,11,4.125s4.5,3.75,13.125,3.75s10.966-2.787,13.25-3.25s8.125-1.125,8.5-3.5S414.875,136.625,411.25,132.25z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://sitegat.com" xlink:show="new" xlink:title="Gat">
+                                            <a xlink:show="new" xlink:title="Gat">
                                                 <path id="gat" d="M344.667,243.167c15.667-0.833,41.167-2.166,45.333,3.667s15.834,6,19.667,0s38.028-6.245,50.833-4.333c4.95,0.739,9.833,0.81,14.438,0.363c10.976-1.066,20.373-5.078,25.342-10.017c-8.889,0.081-18.524-5.195-31.03-10.721C453.125,215,444.625,206.25,444,203.5s0.125-34.5,0.875-44.5c-9.208,14.333-24.041,23-45.708,23S358,162.667,355,158.667c2.167,6.333,1.5,29.833,0.75,45.333c-8.5,15.25-40,24-48,27.5c2.042,1.655,10.695,6.598,20.857,9.508C333.793,242.493,339.373,243.448,344.667,243.167z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://sitetorace.com" xlink:show="new" xlink:title="Torace">
+                                            <a xlink:show="new" xlink:title="Torace">
                                                 <path id="torace" d="M523.5,294c-2.018-20.749-37.75-48.25-48.562-51.137c-4.605,0.447-9.488,0.376-14.438-0.363c-12.805-1.911-47-1.667-50.833,4.333s-15.5,5.833-19.667,0s-29.667-4.5-45.333-3.667c-5.294,0.281-10.873-0.674-16.059-2.159C320,244.75,276.667,271,275.667,306.667s0.003,72.11-0.165,85.722c0.383-0.096,9.666,25.111,12.166,30.778S292.75,441,296.25,447.75C304.5,455.5,343,473,369.5,466s36.5-6.244,65,0.128s52.668-2.794,73.084-27.211c1.25-3.25,4.75-11.75,5.333-15s2.667-6.999,4.084-9.749s7.455-21.675,8.005-21.176C525.678,379.65,524.667,306.001,523.5,294z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://siteAbdomen.com" xlink:show="new" xlink:title="Abdomen">
+                                            <a xlink:show="new" xlink:title="Abdomen">
                                                 <path id="abdomen" d="M434.5,466.128C406,459.756,396,459,369.5,466s-65-10.5-73.25-18.25c3.5,6.75,2,12,3.75,17.75s5,21.334,0.5,41.501s-1.667,35.666-0.5,40.166c0.785,3.029,2.326,5.001,1.419,8.813C313,567.5,331.834,590.5,401.917,590.5s86.417-20.498,98.75-33.499c-1.666-4.5-0.501-12,2.499-21.167s-3.499-44.667-3.833-52.833s2.501-21.5,2.751-27.584s4.25-13.25,5.5-16.5C487.168,463.334,463,472.5,434.5,466.128z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://sitebazin" xlink:show="new" xlink:title="Bazin">
+                                            <a xlink:show="new" xlink:title="Bazin">
                                                 <path id="bazin" d="M401.917,590.5c-70.083,0-88.917-23-100.498-34.52c-0.44,1.852-1.458,4.137-3.419,7.188c-2.708,4.214-5.009,15.491-6.673,27.332c10.34,9.027,56.21,47.939,84.084,82.636c8.255-3.802,35.957-5.104,49.606-0.453c28.214-33.03,74.964-71.046,85.649-79.515c-1-13.666-8.334-31.667-10-36.167C488.334,570.002,472,590.5,401.917,590.5z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="zona_pubiana" d="M375.412,673.136c7.636,9.505,13.921,18.693,17.755,26.864c1-2.167,2.75-2.833,6.833-3.167s5.75,0.834,6.917,1.584c3.8-7.69,10.229-16.519,18.101-25.734C411.368,668.031,383.667,669.334,375.412,673.136z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://sitemana" xlink:show="new" xlink:title="Membru Superior">
+                                            <a xlink:show="new" xlink:title="Membru Superior">
                                                 <path id="mana_dreapta" d="M275.667,306.667c1-35.667,44.333-61.917,52.941-65.659c-10.162-2.91-18.816-7.853-20.857-9.508c-8,3.5-15.5,2-26.75,4.25S239.5,249,227.5,273.5s-9.5,57-9.25,65.75s-2.25,10.25-7.5,18S195.5,396.5,192,408.5s-1.5,12.5-10,23.25s-25.25,50.75-29,72.75c-2.028,11.896-8.779,39.212-16.707,62.487c-6.734,19.772-14.875,36.628-15.793,38.638c-2,4.375-2.375,6-15.75,9.75s-33.125,20.25-37.75,23.25s-7.75,8.375-11.875,10.5s-4.125,8.625,0,10.5s9.625,0.125,13-1.5s9.042-8.457,15.5-10.5c3.788-1.198,7.625-1.5,7.625,0.125s-8.5,22.375-9.125,25.5s-3.875,13.875-5.875,21.125s-5.5,21.25-6.75,29.25s0.875,11.75,5.125,12.625s7.875-7.625,8.646-10.625s2.854-12.75,3.979-15.5s6.625-18.75,8-22s2.375-8.625,4.375-7.75s-0.375,5.875-1.75,9.75S90.75,714.875,90,718.75s-5,19.75-5.25,22.5s-1.875,8.75,2.75,10.5s7.75-1.875,9.5-5.625s5.375-17.625,7.375-26.125s5.75-19.5,7.125-24s2.125-8,3.875-7.875s1.5,2.5,0.75,4.75S110,713.5,109,718.5s-4.25,16.125-5.375,20.375s-1.75,9.25,2.5,10.75s6.875-1.5,8.75-4.75s7.875-21.5,9.369-27.125s4.756-18.5,6.131-22.375s2.5-5.625,3.625-5.5s0.25,2.625-1.125,7s-5.375,18.5-7.125,25s-2.25,9.625,0,12s7.083-0.541,8.25-2.541s3-11,5.667-16.333c1.676-3.352,3.669-11.246,6.53-19.381c1.691-4.808,4.336-9.699,5.636-13.786c3.5-11,4.333-18.833,7-28.5s0.167-11.667,1-20.167s12.833-32.166,17.5-39.666s11.917-19.251,24.917-35.251s25.5-39.75,32-55.75s11.875-45.5,12.25-49.125s1.5-6.125,5-12.875s23.363-47.953,24.001-48.111C275.669,378.777,274.667,342.334,275.667,306.667z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="umar" d="M523.5,294c13.5,30.001,46.022,30.211,58.595,48.439c-0.768-3.438-1.004-7.947-0.345-14.439c1.931-19.007-4.875-52.125-17.875-68.5s-53.125-26.75-63.595-26.654c-4.969,4.939-14.366,8.951-25.342,10.017C485.75,245.75,521.482,273.251,523.5,294z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="brat" d="M609.75,410.75c-1.625-11.25-17.875-51.25-22-57.25c-2.265-3.294-4.53-6.027-5.655-11.061C569.522,324.211,537,324.001,523.5,294c1.167,12.001,2.178,85.65,1.506,98.992c0.108,0.098,20.827,42.675,23.494,48.175C570.5,461.5,612.5,435.5,609.75,410.75z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
@@ -112,7 +112,7 @@
                                                 <path id="palma" d="M709.75,660.75c0.563-6.016-9.75-33.25-6.531-42.375c-6.344-3-13.219-6.125-17.469-8.125c-8.417-0.584-30,7.584-44.875,19.5c1,1.75-0.875,7.125,0.125,16.25s4.125,23.25,6.375,32.125C670,685.75,708.25,676.75,709.75,660.75z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="degete_mana" d="M739.25,640.25c-2.75-3.75-17.5-11.5-21.75-14.5c-2.125-1.5-7.938-4.375-14.281-7.375c-3.219,9.125,7.095,36.359,6.531,42.375c-1.5,16-39.75,25-62.375,17.375c2.25,8.875,7,18.375,8.5,22.875s9.403,29.364,12.625,32c2.75,2.25,7.5,0.75,8.25-2.75s-1.625-10.875-2.5-14.125s-5.625-19.25-6.5-21.75s-2-5.125-0.25-5.125s2.125,2.75,3.25,5.625s5.875,19.5,6.875,24.125s4.5,17,6.25,21.75s5,10,9,9.75s4.875-4.75,5.125-8.375s-5.875-23.5-6.375-27.625s-5.375-19.25-6.125-21.25s-1.375-5,0.625-5.125s2.875,5.625,3.75,8.625s9.75,31.875,10.25,35.5s2.625,14.5,6,17.75c2.744,2.643,5.625,3.875,8.625,0.875s2.25-10,0.875-15.25s-4.625-21.125-5.5-25s-6.375-20.875-7.25-24s-2.125-5.375-1.125-5.75s2.25,1.125,3.5,5.25s6.625,20.5,8.375,25.5s1.5,11.625,4.125,17.375s7,7.625,10.625,7.125s4.277-7.391,4.375-10.125s-4.75-20.5-6.25-27.375s-5.25-16.625-6.5-23s-7.375-23.375-8.625-26s-0.625-4.75,2.5-3.875s9.25,2.625,13,7.625s10.875,6.75,13.375,7s8.5,0.375,9.25-6.375S742,644,739.25,640.25z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                             </a>
-                                            <a xlink:href="http://sitepicior" xlink:show="new" xlink:title="Membru Inferior">
+                                            <a xlink:show="new" xlink:title="Membru Inferior">
                                                 <path id="picior" d="M291.327,590.5c-2.021,14.389-3.102,29.611-2.827,34c0.5,8-6.5,46-11.5,70c-3.981,19.107-12.131,56.915-14.375,92.478c-0.575,9.105,0.172,18.063,0.375,26.522c1,41.5,13,62.5,19.5,76.5s6,37.5,6.5,61c0.155,7.279,0.734,15.999,0.109,25.043c-1.393,20.15-4.799,41.913-4.109,52.957c1,16,4.5,62,7.5,83s6.875,83,7.125,87.5s-1.375,10.625-1.875,14.625s2.125,8.625,1.375,15.875s-6.625,16-11,24.75s-13,19.375-21,28.25s-10.375,26.375-10.125,29.5s3.125,5.875,6.125,5.5c0,1.125,1,2.875,4.25,2.5c0.25,2,0,6.25,8.25,5c4,4.875,7.875,4.625,10.75,1.75c5.292,6.314,10.383,6.492,15.75,5.809c4.375-0.558,11.125-7.809,12.25-10.559s2.25-3.875,5.875-6.75c1.972-1.563,3.795-4.086,5.156-8.824c1.141-3.973,1.957-10.098,2.261-12.758c0.667-5.833,0.667-10.834,4.5-21.334c8.667-3.667,14-10.333,15.5-18.833s1.5-16.834-0.167-21s-2.167-7.167-0.833-12.5s-0.667-18.667-1.833-21.834s-2.833-11.5-3-16.833s7.5-47.167,8.333-58.333s3.667-29.5,4.333-33.333s5.75-17.168,9.5-25.918s3.5-20,2.5-27.25s-3.75-45.75-4.5-51.375s-2.25-13.125-3.5-15.125s0.25-5.5,1.125-7.125S361.75,952.75,363,946.75s2-18.5,4-26.75s8.5-41.5,10.25-55s10.083-66.333,11.815-88.167s1.269-38.833,0.435-43.166s-0.167-12.667-0.417-21.334s3.083-10.166,4.083-12.333c-3.834-8.171-10.12-17.359-17.755-26.864C347.538,638.439,301.667,599.527,291.327,590.5z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="coapsa" d="M425.018,672.683c-7.872,9.216-14.301,18.044-18.101,25.734c1.167,0.75,3.083,5.083,4.333,8.083s1,20.75-0.25,31.5s1.5,59.75,3.75,71s8.417,55.334,10.084,67.001s5.166,31.5,7.166,39.833c36.334,25.833,52.479-20.023,89.334-33.168c5.667-10,13.999-27.333,15.999-52.333c0.874-10.926,1.603-27.168,0.824-43.078c-1.002-20.493-3.844-40.436-5.157-47.754c-2.333-13-14.834-82.834-17-92.667s-4.333-40-5.333-53.666C499.981,601.637,453.231,639.652,425.018,672.683z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
                                                 <path id="rotula" d="M432,915.834c2,8.333,4.333,14.167,4.333,24s4,22.167,5.167,25c17.417,18.167,61,46.833,69.25-8.834c0-11.5,3.25-39.334,3.584-50.334s1.333-13,7-23C484.479,895.811,468.334,941.667,432,915.834z" fill="#FF0000" fill-opacity="0" stroke="#FF0000" stroke-opacity="0.5" cursor="pointer" style="fill: rgb(255, 0, 0); fill-opacity: 0; stroke: rgb(255, 0, 0); stroke-opacity: 0.5;"></path>
@@ -135,13 +135,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Simptome Corp</h3>
                         </div>
-                        <div class="panel-body">
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Simptom 1</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Simptom 2</label>
-                            </div>
+                        <div  id="body_part_symptoms" class="panel-body">
                         </div>
                     </div>
                 </div>
@@ -152,13 +146,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">Simptome selectate</h3>
                         </div>
-                        <div class="panel-body">
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Simptom 1</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Simptom 2</label>
-                            </div>
+                        <div id="selected_symptoms" class="panel-body">
                         </div>
                         <div class="panel panel-footer">
                             <button id="diagnostic_btn" type="button" class="btn btn-success">Diagnostic</button>
@@ -169,4 +157,117 @@
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <script>
+        var selectedSymptoms = [];
+        var checkedSymptoms = [];
+
+        $(document).ready(function () {
+            $("#accordion").on("change", "li input[type='checkbox']", function () {
+                var $label = $(this).next("label");
+                var text = $label.text();
+                var id = $label.data("id");
+                if (this.checked) {
+                    // add checkbox to the list of selected symptoms
+                    AddToSelectedSymptoms(text, id);
+                }
+                else {
+                    // remove checkbox from the list of selected symptoms
+                    RemoveFromSelectedSymptoms(id);
+                }
+            });
+
+            $("div#body_part_symptoms").on("change", "input[type='checkbox']", function () {
+                var $label = $(this).parent();
+                var text = $label.text();
+                var id = $label.data("id");
+                if (this.checked) {
+                    // add checkbox to the list of selected symptoms
+                    AddToSelectedSymptoms(text, id);
+                }
+                else {
+                    // remove checkbox from the list of selected symptoms
+                    RemoveFromSelectedSymptoms(id);
+                }
+            });
+
+            $("div#selected_symptoms").on("change", "input[type='checkbox']", function () {
+                var $label = $(this).parent();
+                var id = $label.data("id");
+                if (this.checked) {
+                    checkedSymptoms.push(id);
+                }
+                else {
+                    var index = checkedSymptoms.indexOf(id);
+                    if (index != -1) {
+                        checkedSymptoms.splice(index, 1);
+                    }
+                }
+            });
+
+            $("button#diagnostic_btn").on("click", function () {
+                console.log(checkedSymptoms);
+            });
+
+            $("div#collapseThree1").on("click", "a", function () {
+                var bodyPart = $(this).attr("xlink:title");
+                var address = "http://localhost:64321/api/symptoms/" + bodyPart;
+                // Call api
+                $.ajax({
+                    url: address,
+                    dataType: "json",
+                    success: function (response) {
+                        $("div#body_part_symptoms").empty();
+                        response.forEach(function (value) {
+                            AddToBodyPartSymptoms(value.name, value.id);
+                        })
+                    },
+                    error: function (request, error) {
+                        console.log("Error when calling api: " + error);
+                    }
+                });
+            });
+        })
+
+        function AddToSelectedSymptoms(text, id) {
+            // add only if the symptom is not allready there
+            if (selectedSymptoms.indexOf(id) == -1) {
+                $element = CreateCheckbox(text, id);
+                $("div#selected_symptoms").append($element);
+                // Add symptom id to the selectedSymptoms array
+                selectedSymptoms.push(id);
+            }
+        }
+
+        function AddToBodyPartSymptoms(text, id) {
+            $element = CreateCheckbox(text, id);
+            $("div#body_part_symptoms").append($element);
+        }
+
+        function RemoveFromSelectedSymptoms(id) {
+            // remove only if symptom is present
+            if (selectedSymptoms.indexOf(id) != -1) {
+                // find input to remove
+                var selector = "div#selected_symptoms label[data-id='" + id + "']";
+                $(selector).parent().remove();
+                // remove from selectedSymptoms array
+                var index = selectedSymptoms.indexOf(id);
+                selectedSymptoms.splice(index, 1);
+            }
+        }
+
+        function CreateCheckbox(text, id) {
+            // create input
+            $input = $("<input type='checkbox'>" + text + "</input>");
+            // create label
+            $label = $("<label data-id='" + id + "'></label>").append($input);
+            // create div
+            $div = $("<div class='checkbox'></div>").append($label);
+
+            return $div;
+        }
+    </script>
+}
 

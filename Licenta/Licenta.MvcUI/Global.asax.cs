@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using AutoMapper;
+using Licenta.MvcUI.App_Start;
 
 namespace Licenta.MvcUI
 {
@@ -13,6 +15,7 @@ namespace Licenta.MvcUI
     {
         protected void Application_Start()
         {
+            Mapper.Initialize(cfg => cfg.AddProfile<MappingProfile>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
