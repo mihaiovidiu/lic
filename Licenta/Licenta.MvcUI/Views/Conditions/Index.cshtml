@@ -4,5 +4,63 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index Boli</h2>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="Cauta Boli" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                       <!-- <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="filter">Categorii</label>
+                                        <select class="form-control" title="Alege o categorie">
+                                            <option value="0" selected>Alege o categorie</option>
+                                            <option value="1">ORL</option>
+                                            <option value="2">Piele</option>
+                                            
+                                        </select>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="contain">Contine...</label>
+                                        <input class="form-control" type="text" placeholder="Cauta cuvinte cheie" />
+                                    </div>
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div> -->
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="container-fluid">
+        <div class="text-center text-info text-capitalize"> <h1>Insert nume boala selectata aici</h1></div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Descriere:</h2></div>
+            <div class="col-lg-9"><p>Selectam din baza de date descrierea bolii.</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Etiologie:</h2></div>
+            <div class="col-lg-9"><p>Selectam din baza de date etiologia bolii.(Other_details collumn)</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Simptome:</h2></div>
+            <div class="col-lg-9"><p>Selectam din baza de date simptomele bolii.</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Tratament:</h2></div>
+            <div class="col-lg-9"><p>Selectam din baza de date tratament bolii.(advice collumn)</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Semne de gravitate:</h2></div>
+            <div class="col-lg-9"><p>Selectam din baza de date semnele de gravitate bolii.(commens collumn)</p></div>
+        </div>
+    </div>
+</div>
