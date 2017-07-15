@@ -11,7 +11,8 @@ namespace Licenta.ConsoleUI
     {
         static void Main(string[] args)
         {
-            GetConditionsForSymptoms("tahicardie");
+            //GetConditionsForSymptoms("tahicardie");
+            GetAllConditions();
             Console.ReadLine();
         }
 

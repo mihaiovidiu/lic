@@ -1,0 +1,122 @@
+﻿@model Licenta.DAL.Condition
+@{
+    ViewBag.Title = "Condition";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                @*<input id="conditionsearch" type="text" class="form-control" placeholder="Cauta Boli" />*@
+                <input id="conditionsearch" type="text" class="form-control" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <!-- <div class="dropdown dropdown-lg">
+                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                             <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                 <form class="form-horizontal" role="form">
+                                     <div class="form-group">
+                                         <label for="filter">Categorii</label>
+                                         <select class="form-control" title="Alege o categorie">
+                                             <option value="0" selected>Alege o categorie</option>
+                                             <option value="1">ORL</option>
+                                             <option value="2">Piele</option>
+
+                                         </select>
+                                     </div>
+                                     <div class="form-group">
+                                         <label for="contain">Contine...</label>
+                                         <input class="form-control" type="text" placeholder="Cauta cuvinte cheie" />
+                                     </div>
+                                     <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                 </form>
+                             </div>
+                         </div> -->
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{ 
+    var displayValue = Model == null ? "none" : "block";
+    var medicalName = Model != null ? Model.medical_name : "";
+    var description = Model != null ? Model.desc : "";
+    var otherDetails = Model != null ? Model.other_details : "";
+    var advice = Model != null ? Model.advice : "";
+    var comments = Model != null ? Model.comments : "";
+}
+<div id="conditionDetailsDiv" class="container" style="display: @displayValue">
+    <div class="container-fluid">
+        <div class="text-center text-info text-capitalize"> <h1 id="conditionName">@medicalName</h1></div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Descriere:</h2></div>
+            <div class="col-lg-9"><p id="conditionDescription">@description</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Etiologie:</h2></div>
+            <div class="col-lg-9"><p id="conditionOtherDetails">@otherDetails</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Simptome:</h2></div>
+            <div class="col-lg-9"><p id="conditionSymptoms">Selectam din baza de date simptomele bolii.</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Tratament:</h2></div>
+            <div class="col-lg-9"><p id="conditionAdvice">@advice</p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><h2>Semne de gravitate:</h2></div>
+            <div class="col-lg-9"><p id="conditionComments">@comments</p></div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/typeahead")
+    <script>
+        $(document).ready(function() {
+            var conditions = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('medical_name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                identify: function (obj) {
+                        return obj.id;
+                },
+                remote: {
+                    url: '../api/conditions?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#conditionsearch').typeahead({
+                minLength: 3,
+                highlight: true,
+            },
+            {
+                name: 'conditions',
+                display: 'medical_name',
+                source: conditions
+            }).on("typeahead:select", function (e, condition) {
+                $("#conditionName").text(condition.medical_name ? condition.medical_name : "");
+                $("#conditionDescription").text(condition.desc ? condition.desc : "");
+                $("#conditionOtherDetails").text(condition.other_details ? condition.other_details : "");
+                $("#conditionSymptoms").html(DisplaySymptoms(condition.symptoms));
+                $("#conditionAdvice").text(condition.advice ? condition.advice : "");
+                $("#conditionComments").text(condition.comments ? condition.comments : "");
+                $("div#conditionDetailsDiv").show();
+
+            });
+
+            function DisplaySymptoms(symptoms) {
+                var textToDisplay = "<ul>";
+                symptoms.forEach(function (symptom) {
+                    textToDisplay += symptom.name ? "<li>" + symptom.name + "</li>": "";
+                })
+                return textToDisplay + "</ul>";
+            }
+        })
+    </script>
+}

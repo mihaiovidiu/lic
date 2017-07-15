@@ -13,6 +13,8 @@ namespace Licenta.MvcUI.App_Start
         public MappingProfile()
         {
             CreateMap<Symptom, SymptomDto>();
+            CreateMap<Condition, ConditionDto>().ForMember(dest => dest.symptoms,
+                opts => opts.MapFrom(src => src.symptoms_conditions.Select(symptomCond => Mapper.Map<Symptom, SymptomDto>(symptomCond.symptom)).ToList()));
         }
     }
 }

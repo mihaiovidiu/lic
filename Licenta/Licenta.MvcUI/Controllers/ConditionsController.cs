@@ -22,10 +22,17 @@ namespace Licenta.MvcUI.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Conditions
-        public ActionResult Index()
+        // GET: Conditions/1
+        public ActionResult Condition(int id = -1)
         {
-            return View();
+            Condition condition = null;
+            if (id != -1)
+            {
+                condition = _dbContext.Conditions.Find(id);
+                if (condition == null)
+                    return HttpNotFound();
+            }
+            return View(condition);
         }
     }
 }
