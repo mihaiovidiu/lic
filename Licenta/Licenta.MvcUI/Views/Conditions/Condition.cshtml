@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="input-group" id="adv-search">
                 @*<input id="conditionsearch" type="text" class="form-control" placeholder="Cauta Boli" />*@
-                <input id="conditionsearch" type="text" class="form-control" />
+                <input id="conditionsearch" type="text" class="form-control" placeholder="Cauta cuvinte cheie" />
                 <div class="input-group-btn">
                     <div class="btn-group" role="group">
                         <!-- <div class="dropdown dropdown-lg">
@@ -101,11 +101,11 @@
                 source: conditions
             }).on("typeahead:select", function (e, condition) {
                 $("#conditionName").text(condition.medical_name ? condition.medical_name : "");
-                $("#conditionDescription").text(condition.desc ? condition.desc : "");
-                $("#conditionOtherDetails").text(condition.other_details ? condition.other_details : "");
+                $("#conditionDescription").html(condition.desc ? condition.desc : "");
+                $("#conditionOtherDetails").html(condition.other_details ? condition.other_details : "");
                 $("#conditionSymptoms").html(DisplaySymptoms(condition.symptoms));
-                $("#conditionAdvice").text(condition.advice ? condition.advice : "");
-                $("#conditionComments").text(condition.comments ? condition.comments : "");
+                $("#conditionAdvice").html(condition.advice ? condition.advice : "");
+                $("#conditionComments").html(condition.comments ? condition.comments : "");
                 $("div#conditionDetailsDiv").show();
 
             });
@@ -117,6 +117,8 @@
                 })
                 return textToDisplay + "</ul>";
             }
+
+            //function Display
         })
     </script>
 }
