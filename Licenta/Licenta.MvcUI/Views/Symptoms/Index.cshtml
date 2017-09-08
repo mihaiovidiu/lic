@@ -149,7 +149,7 @@
                         <div id="selected_symptoms" class="panel-body">
                         </div>
                         <div class="panel panel-footer">
-                            <button id="diagnostic_btn" type="button" class="btn btn-success">Diagnostic</button>
+                            <button id="diagnostic_btn" type="button" class="btn btn-success disabled">Diagnostic</button>
                         </div>
                     </div>
                     <div class="panel panel-default">
@@ -159,7 +159,7 @@
                         <div id="possible_conditions" class="panel-body">
                         </div>
                         <div class="panel panel-footer">
-                            <button id="diagnostic_btn" type="button" class="btn btn-success">Detalii Boala</button>
+                            <button id="details_btn" type="button" class="btn btn-success disabled">Detalii Boala</button>
                         </div>
                     </div>
                 </div>
@@ -173,6 +173,7 @@
     <script>
         var selectedSymptoms = [];
         var checkedSymptoms = [];
+        var selectedConditionId = "";
 
         $(document).ready(function () {
             $("#accordion").on("change", "li input[type='checkbox']", function () {
@@ -196,6 +197,7 @@
                 if (this.checked) {
                     // add checkbox to the list of selected symptoms
                     AddToSelectedSymptoms(text, id);
+
                 }
                 else {
                     // remove checkbox from the list of selected symptoms
@@ -208,17 +210,57 @@
                 var id = $label.data("id");
                 if (this.checked) {
                     checkedSymptoms.push(id);
+                    // Enable button 
+                    if (checkedSymptoms.length == 1) {
+                        //$("button#diagnostic_btn").removeClass("disabled");
+                        //$("button#diagnostic_btn").addClass("active");
+                        EnableButton("button#diagnostic_btn");
+                    }
+
                 }
                 else {
                     var index = checkedSymptoms.indexOf(id);
                     if (index != -1) {
                         checkedSymptoms.splice(index, 1);
+                        // Disable button
+                        if (checkedSymptoms.length == 0) {
+                            //$("button#diagnostic_btn").removeClass("active");
+                            //$("button#diagnostic_btn").addClass("disabled");
+                            DisableButton("button#diagnostic_btn");
+                        }
                     }
                 }
             });
 
+            $("div#possible_conditions").on("change", "input[type='radio']", function () {
+                selectedConditionId = $(this).parent().data("id");
+                EnableButton("button#details_btn");
+            })
+
             $("button#diagnostic_btn").on("click", function () {
-                console.log(checkedSymptoms);
+                var address = "http://localhost:64321/api/conditions/conditionsBySymptoms";
+                $.ajax({
+                    url: address,
+                    data: $.param({ symptomsIds: checkedSymptoms }, true),
+                    dataType: "json",
+                    success: function (response) {
+                        response.forEach(function (condition) {
+                            $radio = CreateRadio(condition.medical_name, condition.id);
+                            $("#possible_conditions").append($radio);
+                        })
+                    },
+                    error: function (request, error) {
+                        console.log("Error when calling api: " + error)
+                    }
+                });
+
+            });
+
+            $("button#details_btn").on("click", function () {
+                if (selectedConditionId) {
+                    var url = "../Conditions/Condition";
+                    window.location.href = url + "/" + selectedConditionId;
+                }
             });
 
             $("div#collapseThree1").on("click", "a", function () {
@@ -277,6 +319,31 @@
             $div = $("<div class='checkbox'></div>").append($label);
 
             return $div;
+        }
+
+        function CreateRadio(text, id) {
+            // Create input
+            $input = $("<input type='radio' name='optradio'>" + text + "</input>");
+            // Create label
+            $label = $("<label data-id='" + id + "'></labeb>").append($input);
+            // Create div
+            $div = $("<div class='radio'></div>").append($label);
+
+            return $div;
+        }
+
+        function EnableButton(buttonSelector) {
+            $button = $(buttonSelector);
+            console.log($button);
+            $button.removeClass("disabled");
+            $button.addClass("active");
+        }
+
+        function DisableButton(buttonSelector) {
+            $button = $(buttonSelector);
+            console.log($button);
+            $button.removeClass("active");
+            $button.addClass("disabled");
         }
     </script>
 }

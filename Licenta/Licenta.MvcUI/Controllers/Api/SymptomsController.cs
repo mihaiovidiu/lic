@@ -37,7 +37,7 @@ namespace Licenta.MvcUI.Controllers.Api
                 return Ok(allSymptoms.Select(Mapper.Map<Symptom, SymptomDto>));
         }
 
-        // GET /api/symptoms/id
+        // GET /api/symptoms/bodyPart
         [System.Web.Http.Route("api/symptoms/{bodyPart}")]
         public IHttpActionResult GetSymptomsByBodyPart(string bodyPart)
         {

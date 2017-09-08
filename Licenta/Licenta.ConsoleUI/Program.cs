@@ -12,7 +12,9 @@ namespace Licenta.ConsoleUI
         static void Main(string[] args)
         {
             //GetConditionsForSymptoms("tahicardie");
-            GetAllConditions();
+            //GetAllConditions();
+            //GetAllSymptoms();
+            GetConditionsForSymptoms(32);
             Console.ReadLine();
         }
 
@@ -96,8 +98,20 @@ namespace Licenta.ConsoleUI
             using (LicentaEntities ctx = new LicentaEntities())
             {
                 var conditions = ctx.Conditions.Where(condition =>
-                    symptomNames.All(s => condition.symptoms_conditions.Select(sc => sc.symptom.name).Contains(s)));
+                    symptomNames.All(sName => condition.symptoms_conditions.Select(sc => sc.symptom.name).Contains(sName)));
                 
+                foreach (Condition c in conditions)
+                    Console.WriteLine(c.medical_name + " " + c.popular_name);
+            }
+        }
+
+        static void GetConditionsForSymptoms(params int[] symptomIds)
+        {
+            using (LicentaEntities ctx = new LicentaEntities())
+            {
+                var conditions = ctx.Conditions.Where(condition =>
+                    symptomIds.All(sId => condition.symptoms_conditions.Select(sc => sc.symptom.Id).Contains(sId)));
+
                 foreach (Condition c in conditions)
                     Console.WriteLine(c.medical_name + " " + c.popular_name);
             }

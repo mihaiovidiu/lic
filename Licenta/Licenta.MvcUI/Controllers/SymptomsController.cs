@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Licenta.MvcUI.Controllers
 {
+    [Authorize]
     public class SymptomsController : Controller
     {
         LicentaEntities _dbContext = null;

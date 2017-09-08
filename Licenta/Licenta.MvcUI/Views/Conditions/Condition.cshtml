@@ -86,7 +86,7 @@
                         return obj.id;
                 },
                 remote: {
-                    url: '../api/conditions?query=%QUERY',
+                    url: 'http://localhost:64321/api/conditions/conditionsByName?query=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
@@ -99,14 +99,26 @@
                 name: 'conditions',
                 display: 'medical_name',
                 source: conditions
-            }).on("typeahead:select", function (e, condition) {
-                $("#conditionName").text(condition.medical_name ? condition.medical_name : "");
-                $("#conditionDescription").html(condition.desc ? condition.desc : "");
-                $("#conditionOtherDetails").html(condition.other_details ? condition.other_details : "");
-                $("#conditionSymptoms").html(DisplaySymptoms(condition.symptoms));
-                $("#conditionAdvice").html(condition.advice ? condition.advice : "");
-                $("#conditionComments").html(condition.comments ? condition.comments : "");
-                $("div#conditionDetailsDiv").show();
+            }).on("typeahead:select", function (e, conditionShort) {
+                var address = "http://localhost:64321/api/conditions/conditionById";
+                $.ajax({
+                    url: address + "/" + conditionShort.id,
+                    dataType: "json",
+                    success: function (condition) {
+                        $("#conditionName").text(condition.medical_name ? condition.medical_name : "");
+                        $("#conditionDescription").html(condition.desc ? condition.desc : "");
+                        $("#conditionOtherDetails").html(condition.other_details ? condition.other_details : "");
+                        $("#conditionSymptoms").html(DisplaySymptoms(condition.symptoms));
+                        $("#conditionAdvice").html(condition.advice ? condition.advice : "");
+                        $("#conditionComments").html(condition.comments ? condition.comments : "");
+                        $("div#conditionDetailsDiv").show();
+                    },
+                    error: function (request, error)
+                    {
+                        console.log("Error when calling api: " + error);
+                    }
+                });
+                
 
             });
 

@@ -22,7 +22,7 @@ namespace Licenta.MvcUI.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Conditions/1
+        // GET: Conditions/Condition/1
         public ActionResult Condition(int id = -1)
         {
             Condition condition = null;

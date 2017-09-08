@@ -29,11 +29,9 @@
                         <li>@Html.ActionLink("Diagnostic", "Index", "Symptoms")</li>
                         <li>@Html.ActionLink("Lista Boli", "Condition", "Conditions")</li>
                         <li>@Html.ActionLink("Spital", "Index", "Hospital")</li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Log In", "Login", "Account")</li>
                     </ul>
+                    @Html.Partial("_LoginPartial")
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

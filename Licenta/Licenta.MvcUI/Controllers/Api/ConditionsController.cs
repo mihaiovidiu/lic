@@ -25,15 +25,37 @@ namespace Licenta.MvcUI.Controllers.Api
             base.Dispose(disposing);
         }
 
-        // GET /api/conditions?query=%QUERY
-        public IHttpActionResult GetConditions(string query = null)
+        // GET /api/conditions/conditionsByName?query=%QUERY
+        [Route("api/conditions/conditionsByName")]
+        public IHttpActionResult GetConditionsByName(string query = null)
         {
             var conditionsQuery = this.dbContext.Conditions.AsQueryable();
             if (!string.IsNullOrEmpty(query))
                 conditionsQuery = conditionsQuery
                     .Where(c => c.medical_name.Contains(query));
-            var listToReturn = conditionsQuery.ToList().Select(Mapper.Map<Condition, ConditionDto>);
+            var listToReturn = conditionsQuery.Select(cond => new { Id = cond.ID, MedicalName = cond.medical_name }).ToList().
+                Select(item => new ConditionShortDto { ID = item.Id, medical_name = item.MedicalName });
             return Ok(listToReturn);
+        }
+
+        [Route("api/conditions/conditionById/{id}")]
+        public IHttpActionResult GetConditionById(int id)
+        {
+            var condition = this.dbContext.Conditions.Find(id);
+            if (condition == null)
+                return NotFound();
+            return Ok(Mapper.Map<ConditionDto>(condition));
+        }
+
+        [Route("api/conditions/conditionsBySymptoms/{*symptomIds}")]
+        public IHttpActionResult GetConditionsForSymptoms([FromUri] int[] symptomsIds)
+        {
+            var conditions = this.dbContext.Conditions.Where(condition =>
+                   symptomsIds.All(sId => condition.symptoms_conditions.Select(sc => sc.symptom.Id).Contains(sId)))
+                   .Select(cond => new { Id = cond.ID, MedicalName = cond.medical_name });
+            var listToReturn = conditions.ToList().Select(item => new ConditionShortDto { ID = item.Id, medical_name = item.MedicalName });
+            return Ok(listToReturn);
+
         }
     }
 }
