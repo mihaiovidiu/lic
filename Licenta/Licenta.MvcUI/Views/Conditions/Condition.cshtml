@@ -1,4 +1,6 @@
-﻿@model Licenta.DAL.Condition
+﻿@using Licenta.MvcUI.Dtos
+
+@model Licenta.DAL.Condition
 @{
     ViewBag.Title = "Condition";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -45,6 +47,7 @@
     var medicalName = Model != null ? Model.medical_name : "";
     var description = Model != null ? Model.desc : "";
     var otherDetails = Model != null ? Model.other_details : "";
+    var symptoms = Model != null ? AutoMapper.Mapper.Map<ConditionDto>(Model).symptoms : null;
     var advice = Model != null ? Model.advice : "";
     var comments = Model != null ? Model.comments : "";
 }
@@ -53,23 +56,37 @@
         <div class="text-center text-info text-capitalize"> <h1 id="conditionName">@medicalName</h1></div>
         <div class="row">
             <div class="col-lg-3"><h2>Descriere:</h2></div>
-            <div class="col-lg-9"><p id="conditionDescription">@description</p></div>
+            <div class="col-lg-9"><p id="conditionDescription">@Html.Raw(description)</p></div>
         </div>
         <div class="row">
             <div class="col-lg-3"><h2>Etiologie:</h2></div>
-            <div class="col-lg-9"><p id="conditionOtherDetails">@otherDetails</p></div>
+            <div class="col-lg-9"><p id="conditionOtherDetails">@Html.Raw(otherDetails)</p></div>
         </div>
         <div class="row">
             <div class="col-lg-3"><h2>Simptome:</h2></div>
-            <div class="col-lg-9"><p id="conditionSymptoms">Selectam din baza de date simptomele bolii.</p></div>
+            <div class="col-lg-9">
+                <p id="conditionSymptoms">
+                    @{ 
+                        if (symptoms != null)
+                        {
+                            <ul>
+                                @foreach(var s in symptoms)
+                                {
+                                    <li>@s.name</li>
+                                }
+                            </ul>
+                        }
+                    }
+                </p>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-3"><h2>Tratament:</h2></div>
-            <div class="col-lg-9"><p id="conditionAdvice">@advice</p></div>
+            <div class="col-lg-9"><p id="conditionAdvice">@Html.Raw(advice)</p></div>
         </div>
         <div class="row">
             <div class="col-lg-3"><h2>Semne de gravitate:</h2></div>
-            <div class="col-lg-9"><p id="conditionComments">@comments</p></div>
+            <div class="col-lg-9"><p id="conditionComments">@Html.Raw(comments)</p></div>
         </div>
     </div>
 </div>
@@ -78,12 +95,14 @@
 {
     @Scripts.Render("~/bundles/typeahead")
     <script>
-        $(document).ready(function() {
+        'use strict';
+
+        $(document).ready(function () {
             var conditions = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('medical_name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 identify: function (obj) {
-                        return obj.id;
+                    return obj.id;
                 },
                 remote: {
                     url: 'http://localhost:64321/api/conditions/conditionsByName?query=%QUERY',
@@ -113,24 +132,23 @@
                         $("#conditionComments").html(condition.comments ? condition.comments : "");
                         $("div#conditionDetailsDiv").show();
                     },
-                    error: function (request, error)
-                    {
+                    error: function (request, error) {
                         console.log("Error when calling api: " + error);
                     }
                 });
-                
+
 
             });
+        });
 
-            function DisplaySymptoms(symptoms) {
+        function DisplaySymptoms(symptoms) {
+            if (symptoms) {
                 var textToDisplay = "<ul>";
                 symptoms.forEach(function (symptom) {
-                    textToDisplay += symptom.name ? "<li>" + symptom.name + "</li>": "";
+                    textToDisplay += symptom.name ? "<li>" + symptom.name + "</li>" : "";
                 })
                 return textToDisplay + "</ul>";
             }
-
-            //function Display
-        })
+        }
     </script>
 }

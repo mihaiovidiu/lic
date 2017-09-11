@@ -171,6 +171,7 @@
 @section scripts
 {
     <script>
+        'use strict';
         var selectedSymptoms = [];
         var checkedSymptoms = [];
         var selectedConditionId = "";
@@ -235,7 +236,7 @@
             $("div#possible_conditions").on("change", "input[type='radio']", function () {
                 selectedConditionId = $(this).parent().data("id");
                 EnableButton("button#details_btn");
-            })
+            });
 
             $("button#diagnostic_btn").on("click", function () {
                 var address = "http://localhost:64321/api/conditions/conditionsBySymptoms";
@@ -244,8 +245,9 @@
                     data: $.param({ symptomsIds: checkedSymptoms }, true),
                     dataType: "json",
                     success: function (response) {
+                        $("div#possible_conditions").empty();
                         response.forEach(function (condition) {
-                            $radio = CreateRadio(condition.medical_name, condition.id);
+                            var $radio = CreateRadio(condition.medical_name, condition.id);
                             $("#possible_conditions").append($radio);
                         })
                     },
@@ -281,12 +283,12 @@
                     }
                 });
             });
-        })
+        }); // End of ready function
 
         function AddToSelectedSymptoms(text, id) {
             // add only if the symptom is not allready there
             if (selectedSymptoms.indexOf(id) == -1) {
-                $element = CreateCheckbox(text, id);
+                var $element = CreateCheckbox(text, id);
                 $("div#selected_symptoms").append($element);
                 // Add symptom id to the selectedSymptoms array
                 selectedSymptoms.push(id);
@@ -294,7 +296,7 @@
         }
 
         function AddToBodyPartSymptoms(text, id) {
-            $element = CreateCheckbox(text, id);
+            var $element = CreateCheckbox(text, id);
             $("div#body_part_symptoms").append($element);
         }
 
@@ -312,29 +314,28 @@
 
         function CreateCheckbox(text, id) {
             // create input
-            $input = $("<input type='checkbox'>" + text + "</input>");
+            var $input = $("<input type='checkbox'>" + text + "</input>");
             // create label
-            $label = $("<label data-id='" + id + "'></label>").append($input);
+            var $label = $("<label data-id='" + id + "'></label>").append($input);
             // create div
-            $div = $("<div class='checkbox'></div>").append($label);
+            var $div = $("<div class='checkbox'></div>").append($label);
 
             return $div;
         }
 
         function CreateRadio(text, id) {
             // Create input
-            $input = $("<input type='radio' name='optradio'>" + text + "</input>");
+            var $input = $("<input type='radio' name='optradio'>" + text + "</input>");
             // Create label
-            $label = $("<label data-id='" + id + "'></labeb>").append($input);
+            var $label = $("<label data-id='" + id + "'></labeb>").append($input);
             // Create div
-            $div = $("<div class='radio'></div>").append($label);
+            var $div = $("<div class='radio'></div>").append($label);
 
             return $div;
         }
 
         function EnableButton(buttonSelector) {
-            $button = $(buttonSelector);
-            console.log($button);
+            var $button = $(buttonSelector);
             $button.removeClass("disabled");
             $button.addClass("active");
         }
